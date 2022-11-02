@@ -1,0 +1,20 @@
+request:
+  method: PUT
+  url: /fraudcheck
+  body:
+    clientId: 123
+    loanAmount: 1000
+  headers:
+    Content-Type: application/json
+  matchers:
+    body:
+      - path: $.['clientId']
+        type: by_regex
+        value: "[0-9]{3}"
+response:
+  status: 200
+  body:
+    fraudCheckStatus: "FRAUD"
+    "rejectionReason": "Amount too high"
+  headers:
+    Content-Type: application/json
